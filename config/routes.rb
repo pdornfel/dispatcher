@@ -1,5 +1,15 @@
 Dispatcher::Application.routes.draw do
+  get "sessions/create"
+  get "sessions/destroy"
+  get "sessions/failed"
+
   resources :notices
+
+  root 'notices#index'
+
+  get 'auth/:provider/callback' => 'sessions#create'
+  get 'auth/failure' => 'sessions#failed'
+  get 'signout' => 'sessions#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
