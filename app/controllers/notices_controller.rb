@@ -28,9 +28,9 @@ class NoticesController < ApplicationController
 
     respond_to do |format|
       if @notice.save
-        Notifier.new_notice(@notice).deliver
+        # Notifier.new_notice(@notice).deliver
         format.html { redirect_to @notice, notice: 'Notice was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @notice }
+        format.json { render json: @notice }
       else
         format.html { render action: 'new' }
         format.json { render json: @notice.errors, status: :unprocessable_entity }
